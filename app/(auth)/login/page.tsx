@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,8 +12,40 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { GoogleIcon, GithubIcon } from "@hugeicons/core-free-icons";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 export default function LoginPage() {
+  async function signInWithGoogle() {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+      fetchOptions: {
+        onSuccess: () => {
+          toast.success("Logged in successfully");
+        },
+        onError: (error) => {
+          toast.error(error.error.message);
+        },
+      },
+    });
+  }
+
+  async function signInWithGithub() {
+    await authClient.signIn.social({
+      provider: "github",
+      callbackURL: "/",
+      fetchOptions: {
+        onSuccess: () => {
+          toast.success("Logged in successfully");
+        },
+        onError: (error) => {
+          toast.error(error.error.message);
+        },
+      },
+    });
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -20,11 +54,11 @@ export default function LoginPage() {
       </CardHeader>
 
       <CardContent className="flex flex-col gap-4">
-        <Button className="w-full bg-primary">
+        <Button className="w-full bg-primary" onClick={signInWithGoogle}>
           <HugeiconsIcon icon={GoogleIcon} className="size-4" />
           Sign in with Google
         </Button>
-        <Button variant="outline" className="w-full">
+        <Button variant="outline" className="w-full" onClick={signInWithGithub}>
           <HugeiconsIcon icon={GithubIcon} className="size-4" />
           Sign in with Github
         </Button>

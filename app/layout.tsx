@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito_Sans, Chivo_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "sonner";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-overpass-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster position="bottom-right" richColors />
           {children}
         </ThemeProvider>
       </body>
