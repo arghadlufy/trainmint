@@ -1,11 +1,11 @@
-import { ModeToggle } from "@/components/theme-toggle";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   return (
     <div>
       <h1 className="text-2xl">
         Hello world
-        <ModeToggle />
+        <ThemeToggle />
       </h1>
     </div>
   );
